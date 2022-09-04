@@ -12,14 +12,13 @@ final weatherServiceProvider = Provider((ref) => WeatherServiceImpl());
 
 abstract class WeatherService {
   Future getWeather(WeatherModel model);
-  void retryWeather();
 }
 
 class WeatherServiceImpl extends WeatherService {
-  final _connectivity = Connectivity();
   final _dio = Dio();
   final _client = Client();
 
+////--------Network request with Dio--------//////
   // @override
   // Future<WeatherResponseModel> getWeather(WeatherModel model) async {
   //   final response = await _dio.get(
@@ -29,6 +28,7 @@ class WeatherServiceImpl extends WeatherService {
   //   return WeatherResponseModel.fromJson(data);
   // }
 
+////--------Network request with http--------//////
   @override
   Future<WeatherResponseModel> getWeather(WeatherModel model) async {
     final response = await _client.get(Uri.parse(
@@ -36,15 +36,5 @@ class WeatherServiceImpl extends WeatherService {
     final data = jsonDecode(response.body);
     print(data);
     return WeatherResponseModel.fromJson(data);
-  }
-
-  @override
-  void retryWeather() {
-    final request = DioConnectivityRequest(
-      dio: _dio,
-      connectivity: _connectivity,
-    );
-    final retryInterceptor = OnRetryConnection(request: request);
-    _dio.interceptors.add(retryInterceptor);
   }
 }

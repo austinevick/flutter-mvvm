@@ -32,31 +32,27 @@ class WeatherResponseModel {
 }
 
 class Data {
-  int? dt;
   Main? main;
   List<Weather>? weather;
   Clouds? clouds;
-  Wind? wind;
-  int? visibility;
-  double? pop;
-  Sys? sys;
-  String? dtTxt;
-  Rain? rain;
+  // Wind? wind;
 
-  Data(
-      {this.dt,
-      this.main,
-      this.weather,
-      this.clouds,
-      this.wind,
-      this.visibility,
-      this.pop,
-      this.sys,
-      this.dtTxt,
-      this.rain});
+  // Sys? sys;
+  DateTime? dtTxt;
+  // Rain? rain;
+
+  Data({
+    //   this.main,
+    this.weather,
+    this.clouds,
+    //  this.wind,
+
+    // this.sys,
+    this.dtTxt,
+    //this.rain
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
-    dt = json['dt'];
     main = json['main'] != null ? Main.fromJson(json['main']) : null;
     if (json['weather'] != null) {
       weather = <Weather>[];
@@ -65,47 +61,46 @@ class Data {
       });
     }
     clouds = json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null;
-    wind = json['wind'] != null ? Wind.fromJson(json['wind']) : null;
-    visibility = json['visibility'];
-    pop = json['pop'];
-    sys = json['sys'] != null ? Sys.fromJson(json['sys']) : null;
-    dtTxt = json['dt_txt'];
-    rain = json['rain'] != null ? Rain.fromJson(json['rain']) : null;
+    // wind = json['wind'] != null ? Wind.fromJson(json['wind']) : null;
+
+    // sys = json['sys'] != null ? Sys.fromJson(json['sys']) : null;
+    dtTxt = DateTime.parse(json['dt_txt']);
+    //  rain = json['rain'] != null ? Rain.fromJson(json['rain']) : null;
   }
 }
 
 class Main {
   num? temp;
-  num? feelsLike;
-  double? tempMin;
-  double? tempMax;
-  int? pressure;
-  int? seaLevel;
-  int? grndLevel;
-  int? humidity;
-  num? tempKf;
+//   num? feelsLike;
+//   double? tempMin;
+//   double? tempMax;
+//   int? pressure;
+//   int? seaLevel;
+//   int? grndLevel;
+//   int? humidity;
+//   num? tempKf;
 
-  Main(
-      {this.temp,
-      this.feelsLike,
-      this.tempMin,
-      this.tempMax,
-      this.pressure,
-      this.seaLevel,
-      this.grndLevel,
-      this.humidity,
-      this.tempKf});
+  Main({
+    this.temp,
+//       this.feelsLike,
+//       this.tempMin,
+//       this.tempMax,
+//       this.pressure,
+//       this.seaLevel,
+//       this.grndLevel,
+//       this.humidity,
+  });
 
   Main.fromJson(Map<String, dynamic> json) {
     temp = json['temp'];
-    feelsLike = json['feels_like'];
-    tempMin = json['temp_min'];
-    tempMax = json['temp_max'];
-    pressure = json['pressure'];
-    seaLevel = json['sea_level'];
-    grndLevel = json['grnd_level'];
-    humidity = json['humidity'];
-    tempKf = json['temp_kf'];
+//     feelsLike = json['feels_like'];
+//     tempMin = json['temp_min'];
+//     tempMax = json['temp_max'];
+//     pressure = json['pressure'];
+//     seaLevel = json['sea_level'];
+//     grndLevel = json['grnd_level'];
+//     humidity = json['humidity'];
+//     tempKf = json['temp_kf'];
   }
 }
 
@@ -135,39 +130,39 @@ class Clouds {
   }
 }
 
-class Wind {
-  double? speed;
-  int? deg;
-  double? gust;
+// class Wind {
+//   double? speed;
+//   int? deg;
+//   double? gust;
 
-  Wind({this.speed, this.deg, this.gust});
+//   Wind({this.speed, this.deg, this.gust});
 
-  Wind.fromJson(Map<String, dynamic> json) {
-    speed = json['speed'];
-    deg = json['deg'];
-    gust = json['gust'];
-  }
-}
+//   Wind.fromJson(Map<String, dynamic> json) {
+//     speed = json['speed'];
+//     deg = json['deg'];
+//     gust = json['gust'];
+//   }
+// }
 
-class Sys {
-  String? pod;
+// class Sys {
+//   String? pod;
 
-  Sys({this.pod});
+//   Sys({this.pod});
 
-  Sys.fromJson(Map<String, dynamic> json) {
-    pod = json['pod'];
-  }
-}
+//   Sys.fromJson(Map<String, dynamic> json) {
+//     pod = json['pod'];
+//   }
+// }
 
-class Rain {
-  double? d3h;
+// class Rain {
+//   double? d3h;
 
-  Rain({this.d3h});
+//   Rain({this.d3h});
 
-  Rain.fromJson(Map<String, dynamic> json) {
-    d3h = json['3h'];
-  }
-}
+//   Rain.fromJson(Map<String, dynamic> json) {
+//     d3h = json['3h'];
+//   }
+// }
 
 class City {
   int? id;
