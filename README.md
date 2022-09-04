@@ -1,5 +1,11 @@
 # flutter_mvvm
 
+# This project is a practical guide to MVVM pattern in flutter with Riverpod.
+# Install flutter
+# Get your APIKEY from https://api.openweathermap.org/data/
+# Run the project 
+
+
 # Screenshots
 ![](https://github.com/austinevick/flutter-mvvm/blob/main/screenshots/Screenshot_20220904-233043.png)
 ![](https://github.com/austinevick/flutter-mvvm/blob/main/screenshots/Screenshot_20220904-210702.png)
