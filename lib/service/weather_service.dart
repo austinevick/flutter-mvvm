@@ -22,7 +22,7 @@ class WeatherServiceImpl extends WeatherService {
   // @override
   // Future<WeatherResponseModel> getWeather(WeatherModel model) async {
   //   final response = await _dio.get(
-  //       "$baseUrl${version}forecast?lat=${model.latitude}&lon=${model.longitude}&appid=$appid");
+  //       "$baseUrl${version}forecast?lat=${model.latitude}&lon=${model.longitude}&appid=$apikey");
   //   final data = (response.data);
   //   print(data);
   //   return WeatherResponseModel.fromJson(data);
@@ -32,7 +32,7 @@ class WeatherServiceImpl extends WeatherService {
   @override
   Future<WeatherResponseModel> getWeather(WeatherModel model) async {
     final response = await _client.get(Uri.parse(
-        "$baseUrl${version}forecast?lat=${model.latitude}&lon=${model.longitude}&appid=$appid"));
+        "$baseUrl${version}forecast?lat=${model.latitude}&lon=${model.longitude}&appid=$apikey"));
     final data = jsonDecode(response.body);
     print(data);
     return WeatherResponseModel.fromJson(data);
