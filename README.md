@@ -1,5 +1,12 @@
 # flutter_mvvm
 
+# Screenshots
+![](https://github.com/austinevick/flutter-mvvm/blob/main/screenshots/Screenshot_20220904-233043.png)
+![](https://github.com/austinevick/flutter-mvvm/blob/main/screenshots/Screenshot_20220904-210702.png)
+![](https://github.com/austinevick/flutter-mvvm/blob/main/screenshots/Screenshot_20220904-233038.png)
+![](https://github.com/austinevick/flutter-mvvm/blob/main/screenshots/Screenshot_20220904-210716.png)
+
+
 A new Flutter project.
 
 ## Getting Started
