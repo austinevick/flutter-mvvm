@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/common/utils.dart';
+import 'package:flutter_mvvm/storage/storage.dart';
 import 'package:flutter_mvvm/view/home_view/home_view.dart';
 import 'package:flutter_mvvm/view/landing_view/landing_view_model.dart';
 import 'package:flutter_mvvm/widget/button_loader.dart';
@@ -12,7 +13,7 @@ class LandingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      // checkInternetConnectivity(ref);
+      final storage = ref.read(storageProvider);
       return Scaffold(
         body: SafeArea(
           minimum: const EdgeInsets.all(16),
@@ -45,6 +46,7 @@ class LandingView extends StatelessWidget {
                       .getUserLocation()
                       .then((value) {
                     if (value) {
+                      storage.savePageValue(value);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (ctx) => const HomeView()));
                     }

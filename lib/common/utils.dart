@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/common/constant.dart';
+import 'package:flutter_mvvm/view/home_view/home_view.dart';
 import 'package:flutter_mvvm/view/home_view/home_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,7 +34,7 @@ void checkInternetConnectivity(WidgetRef ref) {
     switch (event) {
       case ConnectivityResult.mobile:
       case ConnectivityResult.wifi:
-        ref.refresh(homeViewModelProvider);
+        ref.refresh(homeViewFutureProvider(ref));
         break;
       case ConnectivityResult.none:
         showDialogFlash(title: noConnection, content: noConnectionMessage);
