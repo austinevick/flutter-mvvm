@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_mvvm/common/constant.dart';
 import 'package:flutter_mvvm/common/utils.dart';
@@ -12,12 +13,18 @@ import 'package:location/location.dart';
 final homeViewModelProvider = Provider((ref) => HomeViewModel());
 
 class HomeViewModel {
+  final connectivity = Connectivity();
   Future<WeatherResponseModel> getWeather(WidgetRef ref) async {
     try {
       final location = await Location.instance.getLocation();
+      final result = await connectivity.checkConnectivity();
       final model = WeatherModel(
           latitude: location.latitude!, longitude: location.longitude!);
-      print(model.latitude);
+      if (result == ConnectivityResult.none) {
+        return await ref
+            .read(weatherServiceProvider)
+            .getWeatherDataFromDevice();
+      }
       return await ref.read(weatherServiceProvider).getWeather(model);
     } on SocketException catch (_) {
       showDialogFlash(title: noConnection, content: noConnectionMessage);

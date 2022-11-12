@@ -44,3 +44,5 @@ void checkInternetConnectivity(WidgetRef ref) {
     }
   });
 }
+
+final internetNotifier = Provider((ref) => Connectivity());

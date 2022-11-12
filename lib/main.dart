@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/common/utils.dart';
-import 'package:flutter_mvvm/view/view_state_screen.dart';
+import 'package:flutter_mvvm/view/home_view/home_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         theme: ThemeData.dark()
             .copyWith(scaffoldBackgroundColor: const Color(0xff17181f)),
-        home: const ViewStateScreen(),
+        home: const HomeView(),
       ),
     );
   }

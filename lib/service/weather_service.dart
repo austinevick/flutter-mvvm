@@ -1,12 +1,10 @@
 import 'dart:convert';
-
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/dio.dart';
+import 'dart:io';
 import 'package:flutter_mvvm/common/api.dart';
 import 'package:flutter_mvvm/model/weather_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
-import 'package:retry_bot/retry_bot.dart';
+import 'package:path_provider/path_provider.dart';
 
 final weatherServiceProvider = Provider((ref) => WeatherServiceImpl());
 
@@ -15,26 +13,35 @@ abstract class WeatherService {
 }
 
 class WeatherServiceImpl extends WeatherService {
-  final _dio = Dio();
   final _client = Client();
+  String filename = "weather.json";
 
-////--------Network request with Dio--------//////
-  // @override
-  // Future<WeatherResponseModel> getWeather(WeatherModel model) async {
-  //   final response = await _dio.get(
-  //       "$baseUrl${version}forecast?lat=${model.latitude}&lon=${model.longitude}&appid=$apikey");
-  //   final data = (response.data);
-  //   print(data);
-  //   return WeatherResponseModel.fromJson(data);
-  // }
-
-////--------Network request with http--------//////
   @override
   Future<WeatherResponseModel> getWeather(WeatherModel model) async {
+    var dir = await getTemporaryDirectory();
+    File file = File("${dir.path}/$filename");
+
     final response = await _client.get(Uri.parse(
         "$baseUrl${version}forecast?lat=${model.latitude}&lon=${model.longitude}&appid=$apikey"));
     final data = jsonDecode(response.body);
     print(data);
+    file.writeAsStringSync(response.body, flush: true, mode: FileMode.write);
     return WeatherResponseModel.fromJson(data);
+  }
+
+  Future<WeatherResponseModel> getWeatherDataFromDevice() async {
+    var dir = await getTemporaryDirectory();
+    File file = File("${dir.path}/$filename");
+    try {
+      if (file.existsSync()) {
+        final data = file.readAsStringSync();
+
+        final json = jsonDecode(data);
+        return WeatherResponseModel.fromJson(json);
+      }
+      return WeatherResponseModel();
+    } catch (e) {
+      rethrow;
+    }
   }
 }
