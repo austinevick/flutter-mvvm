@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_mvvm/common/constant.dart';
 import 'package:flutter_mvvm/common/utils.dart';
 import 'package:flutter_mvvm/model/weather_model.dart';
@@ -10,11 +9,14 @@ import 'package:flutter_mvvm/service/weather_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:location/location.dart';
 
-final homeViewModelProvider = Provider((ref) => HomeViewModel());
+final homeViewModelProvider = Provider((ref) => HomeViewModel(ref));
 
 class HomeViewModel {
+  final Ref ref;
+  HomeViewModel(this.ref);
+
   final connectivity = Connectivity();
-  Future<WeatherResponseModel> getWeather(WidgetRef ref) async {
+  Future<WeatherResponseModel> getWeather() async {
     try {
       final location = await Location.instance.getLocation();
       final result = await connectivity.checkConnectivity();
@@ -24,12 +26,13 @@ class HomeViewModel {
         return await ref
             .read(weatherServiceProvider)
             .getWeatherDataFromDevice();
+      } else {
+        return await ref.read(weatherServiceProvider).getWeather(model);
       }
-      return await ref.read(weatherServiceProvider).getWeather(model);
     } on SocketException catch (_) {
       showDialogFlash(title: noConnection, content: noConnectionMessage);
       rethrow;
-    } on TimeoutException catch (e) {
+    } on TimeoutException catch (_) {
       showDialogFlash(title: noConnection, content: timeout);
       rethrow;
     }

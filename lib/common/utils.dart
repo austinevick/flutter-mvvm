@@ -3,7 +3,6 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/common/constant.dart';
 import 'package:flutter_mvvm/view/home_view/home_view.dart';
-import 'package:flutter_mvvm/view/home_view/home_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -34,7 +33,7 @@ void checkInternetConnectivity(WidgetRef ref) {
     switch (event) {
       case ConnectivityResult.mobile:
       case ConnectivityResult.wifi:
-        ref.refresh(homeViewFutureProvider(ref));
+        ref.refresh(homeViewFutureProvider);
         break;
       case ConnectivityResult.none:
         showDialogFlash(title: noConnection, content: noConnectionMessage);

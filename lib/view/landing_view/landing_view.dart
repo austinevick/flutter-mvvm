@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm/common/utils.dart';
 import 'package:flutter_mvvm/storage/storage.dart';
 import 'package:flutter_mvvm/view/home_view/home_view.dart';
 import 'package:flutter_mvvm/view/landing_view/landing_view_model.dart';
