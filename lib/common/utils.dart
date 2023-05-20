@@ -33,7 +33,7 @@ void checkInternetConnectivity(WidgetRef ref) {
     switch (event) {
       case ConnectivityResult.mobile:
       case ConnectivityResult.wifi:
-        ref.refresh(homeViewFutureProvider);
+        ref.invalidate(homeViewFutureProvider);
         break;
       case ConnectivityResult.none:
         showDialogFlash(title: noConnection, content: noConnectionMessage);

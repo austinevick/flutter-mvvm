@@ -28,11 +28,10 @@ class HomeView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.place, size: 20),
                             Text(
                               data.city!.name!,
                               style: const TextStyle(
-                                  fontWeight: FontWeight.w800, fontSize: 20),
+                                  fontWeight: FontWeight.w800, fontSize: 30),
                             ),
                             const SizedBox(width: 4),
                             Text(data.city!.country!),
@@ -44,6 +43,8 @@ class HomeView extends StatelessWidget {
                               itemBuilder: (ctx, i) => Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                      // Text(
+                                      //     data.list![i].main!.temp!.toString()),
                                       Text(
                                         DateFormat.yMMMd()
                                             .format(data.list![i].dtTxt!),
@@ -52,7 +53,6 @@ class HomeView extends StatelessWidget {
                                             fontSize: 18),
                                       ),
                                       const SizedBox(height: 15),
-                                      //Text(data.list![i].main!.temp!.toString()),
                                       Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
